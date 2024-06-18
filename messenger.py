@@ -45,6 +45,7 @@ follow_up = [
 ]
 
 def send_greeting():
+    print("sending_greeting")
     try:
         response = requests.get(f"{API_URL}/prospects?skip=0&limit=1")
         response.raise_for_status()
