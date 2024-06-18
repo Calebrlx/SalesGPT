@@ -45,7 +45,6 @@ follow_up = [
 ]
 
 def send_greeting():
-    print("sending_greeting")
     try:
         response = requests.get(f"{API_URL}/prospects?skip=0&limit=1")
         response.raise_for_status()
@@ -57,7 +56,12 @@ def send_greeting():
                 logging.info(f"Sending greeting to {prospect['slug']}: {message}")
                 automate_task(prospect['slug'], message)
                 update_prospect_status(prospect['id'], 'contacted')
+            else:
+                print("[ Prospect Already Contacted ]")
+        else:
+            print("[ No Prospects ]")
     except requests.RequestException as e:
+        print("err")
         logging.error(f"Error while sending greeting: {e}")
 
 def follow_up_check():
