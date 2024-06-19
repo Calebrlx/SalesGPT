@@ -105,11 +105,10 @@ def automate_task(slug, msg):
 
 if __name__ == "__main__":
     send_greeting()
+    
+    schedule.every(30).minutes.do(send_greeting)
+    schedule.every().day.at("12:00").do(follow_up_check)
 
-    # Uncomment the following lines for scheduled tasks
-    # schedule.every(30).minutes.do(send_greeting)
-    # schedule.every().day.at("12:00").do(follow_up_check)
-
-    # while True:
-    #     schedule.run_pending()
-    #     time.sleep(1)
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
